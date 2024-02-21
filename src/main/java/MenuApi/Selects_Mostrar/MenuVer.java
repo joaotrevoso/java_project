@@ -1,6 +1,6 @@
 package MenuApi.Selects_Mostrar;
 
-import com.mycompany.DbApi.Querrys.Select_Querry;
+import com.mycompany.DbApi.Querrys.Selects.SelectQuerrys_AllDatas;
 
 import java.util.Scanner;
 
@@ -24,13 +24,13 @@ public class MenuVer {
             switch (opcao){
 
                 case 1:
-                    Select_Querry.AllDatas(); Select_Querry.ALlHoras(); break;
+                    SelectQuerrys_AllDatas.AllDatas(); SelectQuerrys_AllDatas.ALlHoras(); break;
 
                 case 2:
-                    Select_Querry.AllEmpresas(); break;
+                    SelectQuerrys_AllDatas.AllEmpresas(); break;
 
                 case 3:
-                    Select_Querry.AllEntregadores(); break;
+                    SelectQuerrys_AllDatas.AllEntregadores(); break;
 
                 default: break;
             }

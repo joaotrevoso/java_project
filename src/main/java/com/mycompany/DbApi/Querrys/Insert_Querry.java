@@ -1,5 +1,6 @@
 package com.mycompany.DbApi.Querrys;
 
+import DateandTimeUtilites.DateUtilites;
 import com.mycompany.DbApi.ConnectionDb.ConnectionDB;
 import com.mycompany.DbApi.DbUtilites.RowSet;
 import com.mycompany.DbApi.Tables.EmpresaTb;
@@ -10,13 +11,59 @@ import lombok.extern.log4j.Log4j2;
 
 import javax.sql.ConnectionEvent;
 import javax.sql.rowset.JdbcRowSet;
+import javax.swing.*;
 import javax.xml.stream.events.EntityReference;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.jar.JarOutputStream;
 
 @Log4j2
 public class Insert_Querry {
+
+    public static void NovasEmpresasId(String ids){
+
+        try(JdbcRowSet jr = ConnectionDB.DbConnect()){
+
+            String sql = "select * from Empresas_Entrega where empresas_id = ? and Data_empresas = ?;";
+
+            jr.setCommand(sql);
+
+            jr.setString(1,String.format("%%%s%%",ids));
+
+            jr.setDate(2,DateUtilites.GetDataAtual());
+
+            jr.execute();
+
+            if(!jr.next()){
+
+                jr.moveToInsertRow();
+
+                jr.updateString("empresas_id",ids);
+
+                jr.updateDate("Data_empresas", DateUtilites.GetDataAtual());
+
+                System.out.println(DateUtilites.GetDataAtual());
+
+                jr.insertRow();
+
+                jr.commit();
+            }
+
+            else{
+
+                log.error("deu rim");
+
+            }
+
+
+        } catch (SQLException e) {
+
+            throw new RuntimeException(e);
+        }
+
+    }
 
     public static void NovaEmpresa(String Nome, String Localizacao){
 
@@ -46,7 +93,7 @@ public class Insert_Querry {
 
             else{
 
-                System.out.println("Ja tem um");
+                log.error("Empresa Informada Já existe!");
 
             }
 
@@ -82,7 +129,7 @@ public class Insert_Querry {
 
         else{
 
-            System.out.println("Ja tem um");
+            log.error("Entregador Informado Ja existe! ");
 
         }
 
@@ -93,7 +140,7 @@ public class Insert_Querry {
 
     }
 
-    public static void NovaEntrega(EntregadorTb entregador, EmpresaTb empresa, EntregaTb entrega){
+    public static void NovaEntrega(EntregadorTb entregador, List<EmpresaTb> empresa, EntregaTb entrega){
 
         try(JdbcRowSet jr = ConnectionDB.DbConnect()) {
 
@@ -115,7 +162,13 @@ public class Insert_Querry {
 
                 jr.updateTime("HoraChegada",entrega.getHora_Entrada());
 
-                jr.updateInt("Fkid_Empresa",empresa.getIdEmpresa());
+                Iterator<EmpresaTb> it = empresa.iterator();
+
+                while(it.hasNext()){
+
+                    it.next().getIdEmpresa();
+
+                }
 
                 jr.updateInt("Fkid_Entregador",entregador.getId_Entrehgador());
 

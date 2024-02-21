@@ -5,6 +5,7 @@ import lombok.*;
 import java.net.http.WebSocket;
 import java.util.Objects;
 
+@Builder
 @AllArgsConstructor
 public class EmpresaTb{
 

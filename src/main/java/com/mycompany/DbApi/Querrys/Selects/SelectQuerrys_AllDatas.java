@@ -1,4 +1,4 @@
-package com.mycompany.DbApi.Querrys;
+package com.mycompany.DbApi.Querrys.Selects;
 
 import com.mycompany.DbApi.ConnectionDb.ConnectionDB;
 
@@ -8,9 +8,8 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.time.LocalTime;
-import java.util.Locale;
 
-public class Select_Querry {
+public class SelectQuerrys_AllDatas {
 
 
     public static void AllDatas(){

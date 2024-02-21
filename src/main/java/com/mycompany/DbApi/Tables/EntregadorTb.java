@@ -1,9 +1,11 @@
 package com.mycompany.DbApi.Tables;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Objects;
 
+@Builder
 public class EntregadorTb {
 
     @Getter

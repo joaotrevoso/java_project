@@ -8,7 +8,7 @@ public class ConnectionDB {
 
     public static JdbcRowSet DbConnect() throws SQLException {
 
-        String url = "jdbc:mysql://localhost:3306/Entregadb";
+        String url = "jdbc:mysql://localhost:3306/joaopedro";
         String user ="root";
         String pass = "naosouobeso";
 
