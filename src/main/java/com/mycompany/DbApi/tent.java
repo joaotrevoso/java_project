@@ -6,10 +6,10 @@ package com.mycompany.DbApi;
 
 
 import MenuApi.Inserts.MenuAdicionarNovaEntrega;
-import com.mycompany.DbApi.Querrys.Selects.SelectQuerrys_AllDatas;
+import com.mycompany.DbApi.Querrys.Selects.ConvertStringToInt;
+import com.mycompany.DbApi.Querrys.Selects.SelectForIds;
 import com.mycompany.DbApi.Querrys.Selects.SelectQuerrys_FilterDatas;
-import com.mycompany.DbApi.Tables.Empresas_Entrega;
-import com.mycompany.DbApi.Tables.EntregaTb;
+import com.mycompany.DbApi.Tables.EmpresaTb;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -27,12 +27,13 @@ public class tent {
 
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-       LocalDate lc =  LocalDate.parse("21/02/2024",df);
+       LocalDate lc =  LocalDate.parse("15/09/1980",df);
 
         Date data = Date.valueOf(lc);
 
-        EntregaTb ent = SelectQuerrys_FilterDatas.ShowEntrega(data);
+        //MenuAdicionarNovaEntrega.NovaEntrega();
 
+        SelectQuerrys_FilterDatas.ShowEntrega(data);
 
         }
 

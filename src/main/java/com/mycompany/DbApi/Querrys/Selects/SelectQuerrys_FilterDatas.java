@@ -7,6 +7,7 @@ import com.mycompany.DbApi.Tables.EmpresaTb;
 import com.mycompany.DbApi.Tables.Empresas_Entrega;
 import com.mycompany.DbApi.Tables.EntregaTb;
 import com.mycompany.DbApi.Tables.EntregadorTb;
+import com.mycompany.DbApi.TesteImpressao;
 
 import javax.sql.rowset.JdbcRowSet;
 import java.sql.Date;
@@ -138,6 +139,7 @@ public class SelectQuerrys_FilterDatas {
 
             while (jr.next()){
 
+                System.out.println();
                 EntregaTb td =  EntregaTb.builder().Data_entrega(jr.getDate("DataEntrega"))
                         .Hora_Saida(jr.getTime("HoraSaida"))
                         .Hora_Entrada(jr.getTime("HoraChegada"))
@@ -146,7 +148,8 @@ public class SelectQuerrys_FilterDatas {
                         .Id_Entrega(jr.getInt("pkid_entrega"))
                         .build();
 
-                System.out.println(td);
+                TesteImpressao.Imprimir(td);
+
 
             }
 
