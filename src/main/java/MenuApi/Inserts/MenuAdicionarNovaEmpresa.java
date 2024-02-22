@@ -1,6 +1,6 @@
 package MenuApi.Inserts;
 
-import com.mycompany.DbApi.Querrys.Insert_Querry;
+import com.mycompany.DbApi.Querrys.Inserts.Insert_Querry;
 
 import java.util.Scanner;
 
@@ -9,6 +9,9 @@ public class MenuAdicionarNovaEmpresa {
     public static void AdicionarNovaEmpresa(){
 
         Scanner scan = new Scanner(System.in);
+
+        System.out.println("Empresa nao existente! Cadastrando agora !");
+        System.out.println();
 
         System.out.print("Informe o nome da empresa: ");
         String NomeEmpresa = scan.nextLine().replaceAll(" ", "_").toLowerCase();

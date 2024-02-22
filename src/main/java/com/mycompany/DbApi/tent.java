@@ -5,46 +5,31 @@
 package com.mycompany.DbApi;
 
 
+import MenuApi.Inserts.MenuAdicionarNovaEntrega;
+import com.mycompany.DbApi.Querrys.Selects.SelectQuerrys_AllDatas;
+import com.mycompany.DbApi.Querrys.Selects.SelectQuerrys_FilterDatas;
+import com.mycompany.DbApi.Tables.Empresas_Entrega;
 
-
-
-import com.mycompany.DbApi.Querrys.Insert_Querry;
-
-import java.sql.SQLException;
-
-import java.text.ParseException;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author joaotrevoso
  */
+
 public class tent {
     
-    public static void main(String args[]) throws ParseException, SQLException {
-
-        String a = "123";
-
-        StringBuilder sb = new StringBuilder();
-
-        Insert_Querry.NovasEmpresasId("321");
+    public static void main(String args[]){
 
 
-        for(int i = 0; i  < a.length() ; i++){
+//      MenuAdicionarNovaEntrega.NovaEntrega();
 
-                int d = 0;
-
-                d = Integer.parseInt(sb.append(a.charAt(i)).toString());
-
-                sb.delete(0,1);
-
-            //System.out.println(d + 1);
+        SelectQuerrys_AllDatas.AllEmpresas();
 
         }
 
     }
     
-}
+

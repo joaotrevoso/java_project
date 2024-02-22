@@ -1,32 +1,29 @@
-package com.mycompany.DbApi.Querrys;
+package com.mycompany.DbApi.Querrys.Inserts;
 
 import DateandTimeUtilites.DateUtilites;
+import DateandTimeUtilites.TimeUtilites;
 import com.mycompany.DbApi.ConnectionDb.ConnectionDB;
 import com.mycompany.DbApi.DbUtilites.RowSet;
+import com.mycompany.DbApi.StringUtilites.ArrayIdToString;
 import com.mycompany.DbApi.Tables.EmpresaTb;
+import com.mycompany.DbApi.Tables.Empresas_Entrega;
 import com.mycompany.DbApi.Tables.EntregaTb;
 import com.mycompany.DbApi.Tables.EntregadorTb;
-import com.mysql.cj.result.LongValueFactory;
 import lombok.extern.log4j.Log4j2;
 
-import javax.sql.ConnectionEvent;
 import javax.sql.rowset.JdbcRowSet;
-import javax.swing.*;
-import javax.xml.stream.events.EntityReference;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
-import java.util.jar.JarOutputStream;
 
 @Log4j2
 public class Insert_Querry {
+
 
     public static void NovasEmpresasId(String ids){
 
         try(JdbcRowSet jr = ConnectionDB.DbConnect()){
 
-            String sql = "select * from Empresas_Entrega where empresas_id = ? and Data_empresas = ?;";
+            String sql = "select * from Empresas_Entrega where Fkempresas_id = ? and Data_empresas = ?;";
 
             jr.setCommand(sql);
 
@@ -40,7 +37,7 @@ public class Insert_Querry {
 
                 jr.moveToInsertRow();
 
-                jr.updateString("empresas_id",ids);
+                jr.updateString("Fkempresas_id",ids);
 
                 jr.updateDate("Data_empresas", DateUtilites.GetDataAtual());
 
@@ -53,7 +50,7 @@ public class Insert_Querry {
 
             else{
 
-                log.error("deu rim");
+                log.error("Essa empresa ja existe");
 
             }
 
@@ -91,11 +88,6 @@ public class Insert_Querry {
                 jr.commit();
             }
 
-            else{
-
-                log.error("Empresa Informada Já existe!");
-
-            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -140,7 +132,7 @@ public class Insert_Querry {
 
     }
 
-    public static void NovaEntrega(EntregadorTb entregador, List<EmpresaTb> empresa, EntregaTb entrega){
+    public static void NovaEntrega(EntregadorTb entregador, EntregaTb entrega, Empresas_Entrega emp){
 
         try(JdbcRowSet jr = ConnectionDB.DbConnect()) {
 
@@ -156,23 +148,19 @@ public class Insert_Querry {
 
             if(!jr.next()){
 
+                jr.moveToInsertRow();
+
                 jr.updateDate("DataEntrega",entrega.getData_entrega());
 
                 jr.updateTime("HoraSaida",entrega.getHora_Saida());
 
-                jr.updateTime("HoraChegada",entrega.getHora_Entrada());
-
-                Iterator<EmpresaTb> it = empresa.iterator();
-
-                while(it.hasNext()){
-
-                    it.next().getIdEmpresa();
-
-                }
+                jr.updateTime("HoraChegada", TimeUtilites.NullTime);
 
                 jr.updateInt("Fkid_Entregador",entregador.getId_Entrehgador());
 
-                jr.updateRow();
+                jr.updateInt("Fkid_Empresas",emp.getIdEmpresas_Entrega());
+
+                jr.insertRow();
 
                 jr.commit();
 

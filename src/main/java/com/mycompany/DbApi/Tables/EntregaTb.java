@@ -2,7 +2,6 @@ package com.mycompany.DbApi.Tables;
 
 
 import lombok.Builder;
-import lombok.Data;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -20,9 +19,16 @@ public class EntregaTb {
 
     private Time Hora_Saida;
 
-    private int Id_Empresa;
+    private int Id_Empresas;
 
     private int Id_Entregador;
+
+    public EntregaTb(Date data_entrega, Time hora_Saida, int id_Empresas, int id_Entregador) {
+        Data_entrega = data_entrega;
+        Hora_Saida = hora_Saida;
+        Id_Empresas = id_Empresas;
+        Id_Entregador = id_Entregador;
+    }
 
     public EntregaTb(int id_Entrega, Date data_entrega, Time hora_Entrada, Time hora_Saida, int id_Entregador) {
         Id_Entrega = id_Entrega;
@@ -37,7 +43,7 @@ public class EntregaTb {
         Data_entrega = data_entrega;
         Hora_Entrada = hora_Entrada;
         Hora_Saida = hora_Saida;
-        Id_Empresa = id_Empresa;
+        Id_Empresas = id_Empresa;
         Id_Entregador = id_Entregador;
     }
 
@@ -48,7 +54,7 @@ public class EntregaTb {
                 ", Data_entrega=" + Data_entrega +
                 ", Hora_Entrada=" + Hora_Entrada +
                 ", Hora_Saida=" + Hora_Saida +
-                ", Id_Empresa=" + Id_Empresa +
+                ", Id_Empresa=" + Id_Empresas +
                 ", Id_Entregador=" + Id_Entregador +
                 '}';
     }
@@ -61,7 +67,7 @@ public class EntregaTb {
         EntregaTb entregaTb = (EntregaTb) o;
 
         if (Id_Entrega != entregaTb.Id_Entrega) return false;
-        if (Id_Empresa != entregaTb.Id_Empresa) return false;
+        if (Id_Empresas != entregaTb.Id_Empresas) return false;
         if (Id_Entregador != entregaTb.Id_Entregador) return false;
         if (!Objects.equals(Data_entrega, entregaTb.Data_entrega))
             return false;
@@ -76,7 +82,7 @@ public class EntregaTb {
         result = 31 * result + (Data_entrega != null ? Data_entrega.hashCode() : 0);
         result = 31 * result + (Hora_Entrada != null ? Hora_Entrada.hashCode() : 0);
         result = 31 * result + (Hora_Saida != null ? Hora_Saida.hashCode() : 0);
-        result = 31 * result + Id_Empresa;
+        result = 31 * result + Id_Empresas;
         result = 31 * result + Id_Entregador;
         return result;
     }
@@ -97,8 +103,8 @@ public class EntregaTb {
         return Hora_Saida;
     }
 
-    public int getId_Empresa() {
-        return Id_Empresa;
+    public int getId_Empresas() {
+        return Id_Empresas;
     }
 
     public int getId_Entregador() {

@@ -1,11 +1,16 @@
 package MenuApi.Inserts;
 
+import DateandTimeUtilites.DateUtilites;
 import DateandTimeUtilites.StringToDate;
 import DateandTimeUtilites.StringToTime;
-import com.mycompany.DbApi.Querrys.Insert_Querry;
+import DateandTimeUtilites.TimeUtilites;
+import com.mycompany.DbApi.Querrys.Inserts.Insert_Querry;
 import com.mycompany.DbApi.Querrys.Selects.SelectQuerrys_FilterDatas;
 import com.mycompany.DbApi.StringUtilites.ArrayIdToString;
+import com.mycompany.DbApi.StringUtilites.StringFormat;
 import com.mycompany.DbApi.Tables.EmpresaTb;
+import com.mycompany.DbApi.Tables.Empresas_Entrega;
+import com.mycompany.DbApi.Tables.EntregaTb;
 import com.mycompany.DbApi.Tables.EntregadorTb;
 
 import java.sql.Date;
@@ -24,9 +29,10 @@ public class MenuAdicionarNovaEntrega {
         Scanner scan = new Scanner(System.in);
 
         System.out.print("Informe o nome do entregador: ");
-        String NomeEntregador = scan.nextLine().replaceAll(" ", "_").toLowerCase();
+        String NomeEntregador = StringFormat.Format(scan.nextLine());
 
         EntregadorTb EntregadorFc = SelectQuerrys_FilterDatas.FilterEntregador(NomeEntregador);
+
 
         System.out.println();
 
@@ -53,13 +59,22 @@ public class MenuAdicionarNovaEntrega {
             System.out.print("Nome da empresa: ");
             String empresa = scan.nextLine().replaceAll(" ", "_").toLowerCase();
 
-           Empresas.add(SelectQuerrys_FilterDatas.FilterEmpresas(empresa));
+          Empresas.add(SelectQuerrys_FilterDatas.FilterEmpresas(empresa));
 
         }
 
-        String IdsEmpresas = ArrayIdToString.IdToString(Empresas);
+        Insert_Querry.NovasEmpresasId(ArrayIdToString.IdToString(Empresas));
 
-        Insert_Querry.NovaEntrega(EntregadorFc);
+        Empresas_Entrega tc =
+                SelectQuerrys_FilterDatas.FilterEmpresasEnt(DateUtilites.GetDataAtual(),ArrayIdToString.IdToString(Empresas));
+
+        EntregaTb c = EntregaTb.builder().Data_entrega(DataEntrega)
+                        .Hora_Saida(HoraSql)
+                                .Hora_Entrada(TimeUtilites.NullTime)
+                .build();
+
+        Insert_Querry.NovaEntrega(EntregadorFc,c,tc);
+
 
     }
 
