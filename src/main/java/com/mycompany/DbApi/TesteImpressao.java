@@ -1,10 +1,13 @@
 package com.mycompany.DbApi;
 
-import com.mycompany.DbApi.Querrys.Selects.ConvertStringToInt;
 import com.mycompany.DbApi.Querrys.Selects.SelectForIds;
+import com.mycompany.DbApi.Querrys.Selects.SelectQuerrys_FilterDatas;
+import com.mycompany.DbApi.StringUtilites.ConvertStringToId;
 import com.mycompany.DbApi.Tables.EmpresaTb;
 import com.mycompany.DbApi.Tables.EntregaTb;
 import com.mycompany.DbApi.Tables.EntregadorTb;
+
+import java.util.IllegalFormatConversionException;
 
 public class TesteImpressao {
 
@@ -31,14 +34,15 @@ public class TesteImpressao {
         System.out.println("Empresas: ");
         System.out.println();
 
-        for(int i : ConvertStringToInt.Convert(idEmpresas)){
+        for(int i : ConvertStringToId.GetId(idEmpresas)){
 
             EmpresaTb empresa = SelectForIds.Empresas(i);
 
             System.out.println();
-            System.out.println("Nome: " + empresa.getNomeEmpresa());
-            System.out.println();
-            System.out.println("Localizacao: " + empresa.getLocalizacaoEmpresa());
+
+            System.out.println("localizacao empresa: " + empresa.getLocalizacaoEmpresa());
+
+            System.out.println("Nome empresa: " + empresa.getNomeEmpresa());
 
         }
 

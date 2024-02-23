@@ -13,17 +13,15 @@ public class ArrayIdToString {
 
     public static String IdToString(List<EmpresaTb> empresas){
 
-        strb = new StringBuilder();
+        StringBuilder strb = new StringBuilder();
 
-        Iterator<EmpresaTb> iterator  = empresas.iterator();
+        for (int i = 0; i < empresas.size(); i++) {
 
-        while(iterator.hasNext()){
-
-            strb.append(iterator.next().getIdEmpresa());
+            strb.append(String.format("{%d}",empresas.get(i).getIdEmpresa()));
 
         }
 
-    return strb.toString();
+        return strb.toString();
 
     }
 

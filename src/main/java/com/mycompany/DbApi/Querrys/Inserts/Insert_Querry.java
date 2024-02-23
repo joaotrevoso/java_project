@@ -41,8 +41,6 @@ public class Insert_Querry {
 
                 jr.updateDate("Data_empresas", DateUtilites.GetDataAtual());
 
-                System.out.println(DateUtilites.GetDataAtual());
-
                 jr.insertRow();
 
                 jr.commit();
@@ -81,6 +79,7 @@ public class Insert_Querry {
                 jr.moveToInsertRow();
 
                 jr.updateString("NomeEmpresa", Nome);
+
                 jr.updateString("LocalizacaoEmpresa", Localizacao);
 
                 jr.insertRow();
