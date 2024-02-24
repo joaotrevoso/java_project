@@ -15,7 +15,6 @@ public class TesteImpressao {
 
         EntregadorTb entregador = SelectForIds.Entregador(entrega.getId_Entregador());
 
-        String idEmpresas = SelectForIds.IdsEmpresas(entrega.getId_Empresas());
 
         System.out.println("Nome do entregador: " + entregador.getNome());
         System.out.println();
@@ -34,7 +33,7 @@ public class TesteImpressao {
         System.out.println("Empresas: ");
         System.out.println();
 
-        for(int i : ConvertStringToId.GetId(idEmpresas)){
+        for(int i : ConvertStringToId.GetId(entrega.getId_Empresas())){
 
             EmpresaTb empresa = SelectForIds.Empresas(i);
 

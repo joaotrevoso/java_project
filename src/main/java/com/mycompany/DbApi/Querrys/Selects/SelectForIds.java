@@ -10,32 +10,6 @@ import java.sql.SQLException;
 
 public class SelectForIds {
 
-    public static String IdsEmpresas(int id){
-
-        String sql = "select * from Empresas_Entrega where idEmpresas_Entrega = ?;";
-
-        try(JdbcRowSet jr = ConnectionDB.DbConnect()) {
-
-            jr.setCommand(sql);
-
-            jr.setInt(1,id);
-
-            jr.execute();
-
-            while(jr.next()){
-
-                return jr.getString("Fkempresas_id");
-
-            }
-
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return null;
-
-    }
 
     public static EmpresaTb Empresas(int id){
 

@@ -8,7 +8,7 @@ public class ConnectionDB {
 
     public static JdbcRowSet DbConnect() throws SQLException {
 
-        String url = "jdbc:mysql://localhost:3306/joaopedro";
+        String url = "jdbc:mysql://localhost:3306/ApiEntrega";
         String user ="root";
         String pass = "naosouobeso";
 
@@ -21,6 +21,7 @@ public class ConnectionDB {
             rcb.setAutoCommit(false);
 
             return  rcb;
+
         } catch (SQLException e) {
 
             e.printStackTrace();

@@ -5,22 +5,18 @@ import lombok.*;
 import java.net.http.WebSocket;
 import java.util.Objects;
 
+@Data
 @Builder
 @AllArgsConstructor
 public class EmpresaTb{
 
 
-    private String NomeEmpresa;
+    @Setter(AccessLevel.PRIVATE) private String NomeEmpresa;
 
-    private String LocalizacaoEmpresa;
+    @Setter(AccessLevel.PRIVATE) private String LocalizacaoEmpresa;
 
-    private int IdEmpresa;
+    @Setter(AccessLevel.PRIVATE)private int IdEmpresa;
 
-//    public EmpresaTb(String nomeEmpresa, String localizacaoEmpresa, int idEmpresa) {
-//        NomeEmpresa = nomeEmpresa;
-//        LocalizacaoEmpresa = localizacaoEmpresa;
-//        IdEmpresa = idEmpresa;
-//    }
 
     public EmpresaTb(String nomeEmpresa, int idEmpresa) {
         NomeEmpresa = nomeEmpresa;
@@ -39,25 +35,5 @@ public class EmpresaTb{
         return IdEmpresa;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EmpresaTb empresaTb = (EmpresaTb) o;
-        return IdEmpresa == empresaTb.IdEmpresa;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(IdEmpresa);
-    }
-
-    @Override
-    public String toString() {
-        return "EmpresaTb{" +
-                "NomeEmpresa='" + NomeEmpresa + '\'' +
-                ", LocalizacaoEmpresa='" + LocalizacaoEmpresa + '\'' +
-                ", IdEmpresa=" + IdEmpresa +
-                '}';
-    }
 }

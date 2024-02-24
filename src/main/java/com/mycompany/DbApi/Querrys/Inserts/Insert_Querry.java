@@ -3,62 +3,18 @@ package com.mycompany.DbApi.Querrys.Inserts;
 import DateandTimeUtilites.DateUtilites;
 import DateandTimeUtilites.TimeUtilites;
 import com.mycompany.DbApi.ConnectionDb.ConnectionDB;
-import com.mycompany.DbApi.DbUtilites.RowSet;
-import com.mycompany.DbApi.StringUtilites.ArrayIdToString;
-import com.mycompany.DbApi.Tables.EmpresaTb;
-import com.mycompany.DbApi.Tables.Empresas_Entrega;
+
 import com.mycompany.DbApi.Tables.EntregaTb;
 import com.mycompany.DbApi.Tables.EntregadorTb;
 import lombok.extern.log4j.Log4j2;
 
 import javax.sql.rowset.JdbcRowSet;
 import java.sql.SQLException;
-import java.util.List;
+
 
 @Log4j2
 public class Insert_Querry {
 
-
-    public static void NovasEmpresasId(String ids){
-
-        try(JdbcRowSet jr = ConnectionDB.DbConnect()){
-
-            String sql = "select * from Empresas_Entrega where Fkempresas_id = ? and Data_empresas = ?;";
-
-            jr.setCommand(sql);
-
-            jr.setString(1,String.format("%%%s%%",ids));
-
-            jr.setDate(2,DateUtilites.GetDataAtual());
-
-            jr.execute();
-
-            if(!jr.next()){
-
-                jr.moveToInsertRow();
-
-                jr.updateString("Fkempresas_id",ids);
-
-                jr.updateDate("Data_empresas", DateUtilites.GetDataAtual());
-
-                jr.insertRow();
-
-                jr.commit();
-            }
-
-            else{
-
-                log.error("Essa empresa ja existe");
-
-            }
-
-
-        } catch (SQLException e) {
-
-            throw new RuntimeException(e);
-        }
-
-    }
 
     public static void NovaEmpresa(String Nome, String Localizacao){
 
@@ -72,7 +28,6 @@ public class Insert_Querry {
 
             jr.execute();
 
-            jr.addRowSetListener(new RowSet());
 
             if(!jr.next()) {
 
@@ -131,7 +86,7 @@ public class Insert_Querry {
 
     }
 
-    public static void NovaEntrega(EntregadorTb entregador, EntregaTb entrega, Empresas_Entrega emp){
+    public static void NovaEntrega(EntregadorTb entregador, EntregaTb entrega){
 
         try(JdbcRowSet jr = ConnectionDB.DbConnect()) {
 
@@ -157,7 +112,7 @@ public class Insert_Querry {
 
                 jr.updateInt("Fkid_Entregador",entregador.getId_Entrehgador());
 
-                jr.updateInt("Fkid_Empresas",emp.getIdEmpresas_Entrega());
+                jr.updateString("Fkid_Empresas",entrega.getId_Empresas());
 
                 jr.insertRow();
 

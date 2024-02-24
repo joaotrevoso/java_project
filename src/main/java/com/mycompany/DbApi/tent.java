@@ -6,9 +6,12 @@ package com.mycompany.DbApi;
 
 
 import MenuApi.Inserts.MenuAdicionarNovaEntrega;
+import com.mycompany.DbApi.ConnectionDb.ConnectionDB;
 import com.mycompany.DbApi.Querrys.Selects.SelectQuerrys_FilterDatas;
 
+import javax.sql.rowset.JdbcRowSet;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -20,27 +23,27 @@ import java.util.Scanner;
 
 public class tent {
     
-    public static void main(String args[]){
-
+    public static void main(String args[]) throws SQLException {
 
 
         //MenuAdicionarNovaEntrega.NovaEntrega();
 
-        System.out.println();
-
-        System.out.print("Informe a data da entrega no padrao dd/mm/yyyy: ");
-
         Scanner scan = new Scanner(System.in);
 
-        String date = scan.nextLine();
+       DateTimeFormatter form = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println();
 
-        LocalDate lc =  LocalDate.parse(date,df);
+       LocalDate data = LocalDate.parse( scan.nextLine(),form);
 
-        Date data = Date.valueOf(lc);
+        System.out.println();
 
-        SelectQuerrys_FilterDatas.ShowEntrega(data);
+       Date date = Date.valueOf(data);
+
+
+        SelectQuerrys_FilterDatas.ShowEntrega(date);
+
+
 
         }
 

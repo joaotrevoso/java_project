@@ -9,7 +9,6 @@ import com.mycompany.DbApi.Querrys.Selects.SelectQuerrys_FilterDatas;
 import com.mycompany.DbApi.StringUtilites.ArrayIdToString;
 import com.mycompany.DbApi.StringUtilites.StringFormat;
 import com.mycompany.DbApi.Tables.EmpresaTb;
-import com.mycompany.DbApi.Tables.Empresas_Entrega;
 import com.mycompany.DbApi.Tables.EntregaTb;
 import com.mycompany.DbApi.Tables.EntregadorTb;
 
@@ -63,17 +62,16 @@ public class MenuAdicionarNovaEntrega {
 
         }
 
-        Insert_Querry.NovasEmpresasId(ArrayIdToString.IdToString(Empresas));
+       String ids = ArrayIdToString.IdToString(Empresas);
 
-        Empresas_Entrega tc =
-                SelectQuerrys_FilterDatas.FilterEmpresasEnt(DateUtilites.GetDataAtual(),ArrayIdToString.IdToString(Empresas));
 
         EntregaTb c = EntregaTb.builder().Data_entrega(DataEntrega)
                         .Hora_Saida(HoraSql)
                                 .Hora_Entrada(TimeUtilites.NullTime)
+                .Id_Empresas(ids)
                 .build();
 
-        Insert_Querry.NovaEntrega(EntregadorFc,c,tc);
+        Insert_Querry.NovaEntrega(EntregadorFc,c);
 
 
     }

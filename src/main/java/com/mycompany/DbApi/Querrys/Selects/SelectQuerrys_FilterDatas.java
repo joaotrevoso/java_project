@@ -4,7 +4,6 @@ import MenuApi.Inserts.MenuAdicionarNovaEmpresa;
 import MenuApi.Inserts.MenuAdicionarNovoEntregador;
 import com.mycompany.DbApi.ConnectionDb.ConnectionDB;
 import com.mycompany.DbApi.Tables.EmpresaTb;
-import com.mycompany.DbApi.Tables.Empresas_Entrega;
 import com.mycompany.DbApi.Tables.EntregaTb;
 import com.mycompany.DbApi.Tables.EntregadorTb;
 import com.mycompany.DbApi.TesteImpressao;
@@ -15,37 +14,6 @@ import java.sql.SQLException;
 
 public class SelectQuerrys_FilterDatas {
 
-    public static Empresas_Entrega FilterEmpresasEnt(Date data, String ids){
-
-        String sql = "select * from Empresas_Entrega where Fkempresas_id = ? and Data_empresas = ?;";
-
-        try(JdbcRowSet jr = ConnectionDB.DbConnect()) {
-
-
-            jr.setCommand(sql);
-
-            jr.setString(1,ids);
-            jr.setDate(2,data);
-
-            jr.execute();
-
-            while (jr.next()){
-
-                return Empresas_Entrega.builder().Data_Entrega(jr.getDate("Data_empresas"))
-                        .fkEmpresas_id(jr.getString("Fkempresas_id"))
-                        .idEmpresas_Entrega(jr.getInt("idEmpresas_Entrega"))
-                        .build();
-
-
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-        return null;
-
-    }
 
     public static EntregadorTb FilterEntregador(String EntName){
 
@@ -144,7 +112,7 @@ public class SelectQuerrys_FilterDatas {
                         .Hora_Saida(jr.getTime("HoraSaida"))
                         .Hora_Entrada(jr.getTime("HoraChegada"))
                         .Id_Entregador(jr.getInt("Fkid_Entregador"))
-                        .Id_Empresas(jr.getInt("Fkid_Empresas"))
+                        .Id_Empresas(jr.getString("Fkid_Empresas"))
                         .Id_Entrega(jr.getInt("pkid_entrega"))
                         .build();
 
