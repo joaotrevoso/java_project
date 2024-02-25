@@ -1,6 +1,5 @@
 package com.mycompany.DbApi.Querrys.Inserts;
 
-import DateandTimeUtilites.DateUtilites;
 import DateandTimeUtilites.TimeUtilites;
 import com.mycompany.DbApi.ConnectionDb.ConnectionDB;
 
@@ -13,7 +12,8 @@ import java.sql.SQLException;
 
 
 @Log4j2
-public class Insert_Querry {
+public class Insert_Querry{
+
 
 
     public static void NovaEmpresa(String Nome, String Localizacao){
@@ -44,7 +44,9 @@ public class Insert_Querry {
 
 
         } catch (SQLException e) {
+
             throw new RuntimeException(e);
+
         }
 
     }
@@ -81,7 +83,9 @@ public class Insert_Querry {
 
 
         } catch (SQLException e) {
+
             throw new RuntimeException(e);
+
         }
 
     }
@@ -134,7 +138,8 @@ public class Insert_Querry {
 
         }
 
-
     }
+
+
 
 }

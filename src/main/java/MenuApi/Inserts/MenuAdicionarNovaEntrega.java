@@ -1,8 +1,7 @@
 package MenuApi.Inserts;
 
-import DateandTimeUtilites.DateUtilites;
-import DateandTimeUtilites.StringToDate;
-import DateandTimeUtilites.StringToTime;
+import DateandTimeUtilites.StringConvert;
+import DateandTimeUtilites.StringTo;
 import DateandTimeUtilites.TimeUtilites;
 import com.mycompany.DbApi.Querrys.Inserts.Insert_Querry;
 import com.mycompany.DbApi.Querrys.Selects.SelectQuerrys_FilterDatas;
@@ -19,6 +18,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MenuAdicionarNovaEntrega {
+
+    private static StringTo Convert = new StringConvert();
 
     private static List<EmpresaTb> Empresas;
     private static int controler;
@@ -37,13 +38,13 @@ public class MenuAdicionarNovaEntrega {
 
         System.out.print("Informe a Data da entrega no padrao dd/mm/yyyy: ");
         String DataString = scan.nextLine();
-        Date DataEntrega = StringToDate.Format(DataString);
+        Date DataEntrega = Convert.StringToDate(DataString);
 
         System.out.println();
 
         System.out.print("Informe a Hora da saida no padrao hh:mm:ss: ");
         String HoraString = scan.nextLine();
-        Time HoraSql = StringToTime.StrToTime(HoraString);
+        Time HoraSql = Convert.StringToTime(HoraString);
 
         System.out.print("Informe o numero de empresas na entrega: ");
         controler = scan.nextInt();

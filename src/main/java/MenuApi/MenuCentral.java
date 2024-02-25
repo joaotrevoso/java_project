@@ -1,7 +1,5 @@
 package MenuApi;
 
-import MenuApi.Selects_Mostrar.MenuVer;
-
 import java.util.Scanner;
 
 import static java.lang.System.*;
@@ -23,8 +21,6 @@ public class MenuCentral {
            System.out.print(": "); opcao = sc.nextInt();
 
            switch (opcao){
-
-               case 1: MenuVer.Ver(); break;
 
                default: break;
            }
